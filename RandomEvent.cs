@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.EventSystems;
 
-public class RandomEvent : MonoBehaviour {
+public class RandomEvent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+{
+
+    public persistantVariables pers;
 
     public Dictionary<GameObject, string> eventNames = new Dictionary<GameObject, string>();
     public Dictionary<GameObject, GameObject> eventImage = new Dictionary<GameObject, GameObject>();
@@ -18,6 +23,7 @@ public class RandomEvent : MonoBehaviour {
 	void Start () {
         //eventNames = new string[] { "meteor strike", "meatier strike", "school fire", "building fire", "bridge collapse", "charity ball", "free puppy day", "the opportunity to pop a large baloon full of glitter over a highly populated area" };
         baseObj = GameObject.Find("templateSprite").GetComponent<SpriteRenderer>();
+        pers = GameObject.Find("persistant").GetComponent<persistantVariables>();
         for(int x = 0; x <= numBuildings; x++)
         {
             eventNames.Add(buildings[x], "There is a fire!");
@@ -43,8 +49,25 @@ public class RandomEvent : MonoBehaviour {
         myNum = 0;
         GameObject key1 = buildings[myNum];
         baseObj.GetComponent<SpriteRenderer>().sprite = eventImage[buildings[myNum]].GetComponent<SpriteRenderer>().sprite;
+        //Debug.Log(eventNames[buildings[0]]);
+        pers.pointerText.GetComponent<TextMeshProUGUI>().text = eventNames[buildings[myNum]];
 
         baseObj.transform.position = key1.transform.position;
+
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
 
     }
 }

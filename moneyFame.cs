@@ -14,6 +14,8 @@ public class moneyFame : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public float coolTimer;
     public persistantVariables pers;
 
+    public string myText;
+
     public Image myImage;
 
 	// Use this for initialization
@@ -48,11 +50,13 @@ public class moneyFame : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         pers.hoverOver = true;
+        pers.pointerGuiText.text = myText;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         pers.hoverOver = false;
         pers.pointerText.SetActive(false);
+        pers.pointerGuiText.text = "";
     }
 }

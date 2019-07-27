@@ -1,26 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class persistantVariables : MonoBehaviour {
 
     private int totalMoney;
     private int totalFame;
+
+    private int numMinions;
+
     public string name;
     public bool hoverOver;
     public GameObject pointerText;
+    public TextMeshProUGUI pointerGuiText;
 
     public Vector3 textOffset;
     public Canvas myCanvas;
 
+
+
 	// Use this for initialization
 	void Start () {
         pointerText = GameObject.Find("toolTip");
+        pointerGuiText = pointerText.GetComponent<TextMeshProUGUI>();
         pointerText.SetActive(false);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if(hoverOver)
         {
             pointerText.SetActive(true);
