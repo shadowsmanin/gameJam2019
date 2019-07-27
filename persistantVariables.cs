@@ -13,6 +13,8 @@ public class persistantVariables : MonoBehaviour {
     public Vector3 textOffset;
     public Canvas myCanvas;
 
+    public ParticleSystem pSyst;
+
 	// Use this for initialization
 	void Start () {
         pointerText = GameObject.Find("toolTip");

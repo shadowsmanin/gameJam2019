@@ -13,6 +13,7 @@ public class moneyFame : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public float coolDown;
     public float coolTimer;
     public persistantVariables pers;
+    private ParticleSystem pSyst;
 
     public Image myImage;
 
@@ -42,6 +43,10 @@ public class moneyFame : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
             pers.addFame(fame);
             pers.addMoney(money);
             money = pers.getMoney();
+
+            pSyst = pers.pSyst;
+            pSyst.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            pSyst.Play();
         }
     }
 
