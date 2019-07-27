@@ -24,7 +24,7 @@ public class persistantVariables : MonoBehaviour {
 		if(hoverOver)
         {
             pointerText.SetActive(true);
-            pointerText.transform.position = Input.mousePosition + textOffset;
+            pointerText.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition + textOffset).x, Camera.main.ScreenToWorldPoint(Input.mousePosition + textOffset).y, 1);
         }
 	}
 

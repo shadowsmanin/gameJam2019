@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class moneyFame : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
 
@@ -9,26 +10,39 @@ public class moneyFame : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public int fame;
     public int cost;
     public int moneyMultiplier;
+    public float coolDown;
+    public float coolTimer;
     public persistantVariables pers;
+
+    public Image myImage;
 
 	// Use this for initialization
 	void Start () {
 
         pers = GameObject.Find("persistant").GetComponent<persistantVariables>();
-		
+        myImage = gameObject.GetComponent<Image>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        if(coolTimer < coolDown)
+        {
+            coolTimer += Time.deltaTime;
+            myImage.fillAmount = coolTimer / coolDown;
+        }
 		
 	}
 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        pers.addFame(fame);
-        pers.addMoney(money);
-        money = pers.getMoney();
+        if (coolTimer >= coolDown)
+        {
+            coolTimer = 0;
+            pers.addFame(fame);
+            pers.addMoney(money);
+            money = pers.getMoney();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
